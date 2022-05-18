@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2022-05-18
+### Added
+- Logical conditions added for brave browser
+- Readme file and license updated
+- driver function renamed
+
 ## [2.0] - 2022-04-22
 ### Added
 - Crypto-js dependency removed
