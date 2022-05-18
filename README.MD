@@ -19,6 +19,8 @@ This package generates a unique ID/String for different browsers. Like chrome, F
 <p align="center"><a href="https://codesandbox.io/s/browser-fingerprinting-generate-unique-device-id-or-browser-id-507n2v" target="_blank">CodeSandbox, </a>
 <a href="https://broprintjs.netlify.app/" target="_blank" >Live Demo</a> </p>
 
+> ⚠ The code is completely open source and not relating to anyone, created in my spare time. [only for educational purpose]
+
 ## :hear_no_evil:  What's all the hullabaloo?  
 <a href="https://broprintjs.netlify.app/" target="_blank">Broprint.js</a> helps JavaScript developers code visitors identifier more simply, readably, and securely. Whether you need to find a unique visitor, do analytics, browser fingerprinting, or do anything of the like while even preventing frauds, we've got you covered at a **cryptographically strong** level. The best part? Our library is extremely lightweight and developer friendly- which means it won't take a toll on your project, and it's uber-simple to implement. This library works on the concept of **canvas** fingerprint and **audio** fingerprint, the final result which a user get is the combination of **audio and canvas fingerprint**. We are using **cryptojs** under the hood for encryptions but you can easily tweek the library to remove the dependency.  <br/><br/><br/>
 </br>
