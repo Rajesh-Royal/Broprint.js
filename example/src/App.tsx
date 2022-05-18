@@ -1,3 +1,4 @@
+import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
 import React, { useState } from 'react';
 import './App.css';
 
