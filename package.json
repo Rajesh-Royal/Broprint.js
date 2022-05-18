@@ -1,0 +1,46 @@
+{
+  "name": "@rajesh896/broprint.js",
+  "version": "1.2.3",
+  "description": "The world's easiest, smallest and powerful visitor identifier for browsers.",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "private": false,
+  "scripts": {
+    "build:npm": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1 "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajesh-Royal/Broprint.js.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "bin": {
+    "getDeviceId()": "./lib/index.js"
+  },
+  "keywords": [
+    "browserfingerprint",
+    "fingerprinting",
+    "jsfingerprint",
+    "uniquebrowserid",
+    "nodejs",
+    "cryptography",
+    "fraud-detection",
+    "canvas-fingerprinting",
+    "audio-fingerprinting",
+    "visitor-identifier",
+    "identification",
+    "reactjs",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Rajesh-Royal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rajesh-Royal/Broprint.js/issues"
+  },
+  "homepage": "https://github.com/Rajesh-Royal/Broprint.js#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}

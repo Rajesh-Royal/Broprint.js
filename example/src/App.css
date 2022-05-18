@@ -1,0 +1,75 @@
+body, html{
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: #282c34;
+  min-height: 100vh;
+  width: 100%;
+  font-size: calc(60px + 2vmin);
+  color: white;
+}
+.App .header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.App p{
+  font-size: 14px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+.App p b{
+  color: #f71137;
+  font-size: 16px;
+}
+
+.App .id-container{
+  margin-top: 20px;
+}
+.App .id-container textarea{
+  font-size: 30px;
+  max-width: 900px;
+  padding: 20px;
+}
+.App .id-container button{
+  padding: 10px 25px;
+  color: white;
+  background: #f71137;
+  border: 1px solid #f71137;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.App .id-container button:hover {
+  background: #f8072f;
+}
+
+footer{
+  margin-top: 80px;
+  font-size: 24px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+
+}
+footer a{
+  color: #f71137 !important;
+}
+footer div{
+  margin: 10px;
+}
+
+
