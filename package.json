@@ -1,5 +1,5 @@
 {
-  "name": "@rajesh896/broprints.js",
+  "name": "@rajesh896/broprint.js",
   "version": "1.2.4",
   "description": "The world's easiest, smallest and powerful visitor identifier for browsers.",
   "main": "./lib/index.js",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Rajesh-Royal/Broprint.js.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "bin": {
     "getDeviceId()": "./lib/index.js"
