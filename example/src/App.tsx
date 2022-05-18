@@ -1,20 +1,16 @@
+import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
 import React, { useState } from 'react';
 import './App.css';
-import { getDeviceId } from './code/FingerPrint';
+
 
 function App() {
   const [browserFingerprint, setBrowserFingerPrint] = useState("");
   const getBrowserFingerPrint = () => {
-    getDeviceId().then((res) => {
+    getCurrentBrowserFingerPrint().then((res) => {
       setBrowserFingerPrint(res)
     }).catch((err) => {
       setBrowserFingerPrint(JSON.stringify(err))
     })
-  //   getDeviceId().then((fingerprint) => {
-  //   setBrowserFingerPrint(fingerprint)
-  //   }).catch((err) => {
-  //   setBrowserFingerPrint(err)
-  // })
  }
   
   return (
