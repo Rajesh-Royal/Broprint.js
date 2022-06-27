@@ -1,6 +1,6 @@
 {
   "name": "@rajesh896/broprint.js",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "The world's easiest, smallest and powerful visitor identifier for browsers.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

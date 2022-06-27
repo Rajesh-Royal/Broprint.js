@@ -1,5 +1,5 @@
 import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 
@@ -24,7 +24,7 @@ function App() {
       <section className="id-container">
         <textarea rows={3} cols={100} placeholder="This browser's fingerprint" value={browserFingerprint} onChange={() => {}}></textarea>
         <p><button onClick={() => {getBrowserFingerPrint()}}>Generate FingerPrint</button></p>
-        <p style={{marginTop: 20}}>You must try this window in incognito, with vpn and check if Id remains same. It will never change.</p>
+        <p style={{marginTop: 20}}>You must try this window in incognito, with vpn and check if Id remains same. It will never change. <sub>[no brave support]</sub></p>
       </section>
       <footer>
         <div><a href='https://github.com/rajesh-royal' title='developer/author github account'>@rajesh-royal</a></div>
