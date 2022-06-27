@@ -18,12 +18,14 @@ body, html{
   width: 100%;
   font-size: calc(60px + 2vmin);
   color: white;
+  /* padding: 10px; */
 }
 .App .header{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .App p{
   font-size: 14px;
@@ -42,6 +44,7 @@ body, html{
 .App .id-container textarea{
   font-size: 30px;
   max-width: 900px;
+  width: 100%;
   padding: 20px;
 }
 .App .id-container button{
