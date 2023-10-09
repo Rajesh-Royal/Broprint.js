@@ -33,18 +33,18 @@ This package generates a unique ID/String for different browsers. Like chrome, F
 Using npm:
 ```JavaScript
 //Install:
-npm i npm i @rajesh896/broprint.js
+npm i @rajesh896/broprint.js
 ```
 Using Yarn:
 ```Javascript
 //Install:
-yarn add npm i @rajesh896/broprint.js
+yarn add @rajesh896/broprint.js
 ```
 <br/><br/>
 ## :tada:  Examples  
 >### **In Reactjs**
 ```javascript
-import { getCurrentBrowserFingerPrint } from "npm i @rajesh896/broprint.js";
+import { getCurrentBrowserFingerPrint } from "@rajesh896/broprint.js";
 
 getCurrentBrowserFingerPrint().then((fingerprint) => {
     // fingerprint is your unique browser id.
@@ -56,7 +56,7 @@ getCurrentBrowserFingerPrint().then((fingerprint) => {
 <br/>
 
 >### Using this script in the html files
- 1. Execute `npm i npm i @rajesh896/broprint.js`
+ 1. Execute `npm i @rajesh896/broprint.js`
  2. Then -
 ```html
 <!DOCTYPE html>
@@ -71,7 +71,7 @@ getCurrentBrowserFingerPrint().then((fingerprint) => {
 
 <body>
     <script type="module">
-        import("./node_modules/npm i @rajesh896/broprint.js/index.js").then((module) => {
+        import("./node_modules/@rajesh896/broprint.js/index.js").then((module) => {
             module.getCurrentBrowserFingerPrint().then((fingerprint) => {
                 console.log(fingerprint);
             })
