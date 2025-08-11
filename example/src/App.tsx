@@ -27,7 +27,7 @@ function App() {
         <p style={{marginTop: 20}}>You must try this window in incognito, with vpn and check if Id remains same. It will never change. <sub>[no brave support]</sub></p>
       </section>
       <footer>
-        <div><a href='https://github.com/rajesh-royal' title='developer/author github account'>@rajesh-royal</a></div>
+        <div><a href='https://x.com/Raj_896' title='developer/author twitter or X account'>@Raj_896</a></div>
         <div><a title='go to github link of this repo' href='https://github.com/Rajesh-Royal/Broprint.js'>GitHub</a></div>
       </footer>
     </div>
