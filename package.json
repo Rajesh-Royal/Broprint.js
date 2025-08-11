@@ -41,6 +41,13 @@
     "url": "https://github.com/Rajesh-Royal/Broprint.js/issues"
   },
   "homepage": "https://github.com/Rajesh-Royal/Broprint.js#readme",
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.MD"
+  ],
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
 }
