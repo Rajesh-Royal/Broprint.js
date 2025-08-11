@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Fingerprint, Github, Twitter } from 'lucide-react'
 import { Badge } from './ui/badge'
 import React, { useEffect, useState } from 'react'
+import { GithubSvgIcon, XSvgIcon } from './icons'
 
 export const Header = () => {
   const [version] = useState('v2')
@@ -24,8 +25,12 @@ export const Header = () => {
         </Badge>
       </div>
       <div className="flex gap-4">
-        <motion.a href="https://github.com/Rajesh-Royal/Broprint.js" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}><Github className="w-6 h-6" /></motion.a>
-        <motion.a href="https://x.com/Raj_896" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}><Twitter className="w-6 h-6" /></motion.a>
+        <motion.a href="https://github.com/Rajesh-Royal/Broprint.js" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}>
+        <GithubSvgIcon className="w-6 h-6 fill-[#22d3ee]" />
+        </motion.a>
+        <motion.a href="https://x.com/Raj_896" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}>
+        <XSvgIcon className="w-6 h-6 fill-[#22d3ee]" />
+        </motion.a>
       </div>
     </motion.div>
   )
