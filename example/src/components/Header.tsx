@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Fingerprint, Github, Twitter } from 'lucide-react'
+import { Fingerprint } from 'lucide-react'
 import { Badge } from './ui/badge'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GithubSvgIcon, XSvgIcon } from './icons'
 
 export const Header = () => {
