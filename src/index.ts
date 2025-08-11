@@ -57,3 +57,11 @@ declare global {
         };
     }
 }
+
+// Expose as a global for classic <script src> usage when a UMD/IIFE build is loaded.
+// This is safe and idempotent; bundlers/tree-shakers ignore this in ESM contexts.
+try {
+    if (typeof window !== 'undefined' && !(window as any).getCurrentBrowserFingerPrint) {
+        (window as any).getCurrentBrowserFingerPrint = getCurrentBrowserFingerPrint;
+    }
+} catch (_) { /* no-op */ }

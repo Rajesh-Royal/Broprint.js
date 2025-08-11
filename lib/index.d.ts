@@ -4,3 +4,10 @@
  * @return {Promise<string>} - resolve(string)
  */
 export declare const getCurrentBrowserFingerPrint: () => Promise<string>;
+declare global {
+    interface Navigator {
+        brave: {
+            isBrave: () => {};
+        };
+    }
+}

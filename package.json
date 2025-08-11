@@ -3,10 +3,21 @@
   "version": "2.1.1",
   "description": "The world's easiest, smallest and powerful visitor identifier for browsers.",
   "main": "./lib/index.js",
+  "module": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js",
+      "default": "./lib/index.mjs"
+    },
+    "./global": "./lib/index.global.js"
+  },
   "private": false,
   "scripts": {
-    "build:npm": "tsc",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir lib --declarationMap false",
+  "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
+    "build": "npm run build:bundle && npm run build:types",
     "test": "echo \"Error: no test specified\" && exit 1 "
   },
   "repository": {
@@ -46,8 +57,8 @@
     "LICENSE",
     "README.MD"
   ],
-  "dependencies": {},
   "devDependencies": {
+    "tsup": "^8.5.0",
     "typescript": "^5.4.0"
   }
 }
