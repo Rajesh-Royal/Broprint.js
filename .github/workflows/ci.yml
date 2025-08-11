@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ develop, master ]
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install deps
+        run: npm ci || npm install --no-audit --no-fund
+      - name: Build
+        run: npm run build:npm
+      - name: Package size (approx)
+        run: du -sh lib || true

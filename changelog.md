@@ -1,6 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2025-08-11
+
+### Added
+
+- Multi-format build: ESM (`index.mjs`), CJS (`index.js`), and global/IIFE (`index.global.js`).
+- Export map for proper Node/ bundler resolution.
+- Automatic global `getCurrentBrowserFingerPrint` exposure for classic `<script>` usage.
+
+### Fixed
+
+- CDN usage now works for both `<script type=module>` and classic `<script>` tags.
+
+### Docs
+
+- README updated with new CDN examples and removed outdated crypto-js reference.
+
 ## [2.1.0] - 2022-05-18
 ### Added
 - Logical conditions added for brave browser

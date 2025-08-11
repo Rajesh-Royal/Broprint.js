@@ -1,0 +1,16 @@
+# CODEOWNERS file
+# Lines are matched top-to-bottom; the last matching pattern takes precedence.
+# Reference <https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners>
+
+# Default owner(s) for everything in the repo
+* @Rajesh-Royal
+
+# Documentation
+/docs/ @Rajesh-Royal
+
+# GitHub metadata
+/.github/ @Rajesh-Royal
+
+# Library source (TypeScript) and build outputs
+/src/ @Rajesh-Royal
+/lib/ @Rajesh-Royal
