@@ -18,6 +18,7 @@
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir lib --declarationMap false",
   "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
     "build": "npm run build:bundle && npm run build:types",
+    "build:npm": "npm run build:bundle && npm run build:types",
     "test": "echo \"Error: no test specified\" && exit 1 "
   },
   "repository": {
