@@ -55,25 +55,24 @@ npm i @rajesh896/broprint.js
 yarn add @rajesh896/broprint.js
 ```
 
-### Using CDN (jsDelivr):
-You can load Broprint.js directly in the browser with a free CDN:
+### Using CDN (jsDelivr) (v2.2.0+)
+You can load Broprint.js directly in the browser in two ways:
+
+ESM (modern browsers):
 
 ```html
 <script type="module">
-    import { getCurrentBrowserFingerPrint } from 'https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.js';
-    getCurrentBrowserFingerPrint().then(fingerprint => {
-        console.log('Browser fingerprint:', fingerprint);
-    });
+    import { getCurrentBrowserFingerPrint } from 'https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.mjs';
+    getCurrentBrowserFingerPrint().then(fp => console.log('Fingerprint:', fp));
 </script>
 ```
 
-Or, for classic script usage (exposes as a global):
+Classic global (no module support needed):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.global.js"></script>
 <script>
-    // If the library exposes a global (update if UMD/global build is added)
-    // Example: window.getCurrentBrowserFingerPrint()
+    getCurrentBrowserFingerPrint().then(fp => console.log('Fingerprint (global):', fp));
 </script>
 ```
 <br/>
@@ -97,7 +96,7 @@ getCurrentBrowserFingerPrint().then((fingerprint) => {
 
 <br/>
 
->### Using this script in the html files
+>### Using this script in a plain HTML file (local install)
 
  1. Execute `npm i @rajesh896/broprint.js`
  2. Then -
@@ -115,7 +114,7 @@ getCurrentBrowserFingerPrint().then((fingerprint) => {
 
 <body>
     <script type="module">
-        import("./node_modules/@rajesh896/broprint.js/index.js").then((module) => {
+    import("./node_modules/@rajesh896/broprint.js/lib/index.mjs").then((module) => {
             module.getCurrentBrowserFingerPrint().then((fingerprint) => {
                 console.log(fingerprint);
             })
@@ -126,7 +125,7 @@ getCurrentBrowserFingerPrint().then((fingerprint) => {
 </html>
 ```
 
-- From version `1.1.0` onwards we have a dependency `crypto-js`. If you do not want to have this dependency then use the earlier versions of this library.
+> Note: Since v2.0 crypto-js was removed. v2.2.0 introduced multi-format builds (ESM, CJS, Global) and proper CDN usage.
 
 If you want to use it in simple `.html` file, please read the `index.html` file in the root directory.
 
