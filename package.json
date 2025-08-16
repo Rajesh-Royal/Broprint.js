@@ -9,7 +9,8 @@
     ".": {
       "import": "./lib/index.mjs",
       "require": "./lib/index.js",
-      "default": "./lib/index.mjs"
+      "default": "./lib/index.mjs",
+      "types": "./lib/index.d.ts"
     },
     "./global": "./lib/index.global.js"
   },
