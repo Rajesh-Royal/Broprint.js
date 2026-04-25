@@ -1,11 +1,24 @@
-export const isCanvasSupported = () => {
+/**
+ * Whether the runtime supports HTML5 canvas with a 2D context.
+ * @returns true if canvas+2d is available, false otherwise
+ */
+export const isCanvasSupported = (): boolean => {
     const elem = document.createElement('canvas');
     return !!(elem.getContext && elem.getContext('2d'));
 };
 
 // this working code snippet is taken from - https://github.com/artem0/canvas-fingerprinting/blob/master/fingerprinting/fingerprint.js
 
-export const getCanvasFingerprint = () => {
+/**
+ * Render a fixed text + shapes to a canvas and return its dataURL. Different
+ * browsers/GPUs render with subtle pixel differences, producing a stable
+ * per-browser identifier.
+ *
+ * Returns the literal string `'broprint.js'` if canvas is unsupported.
+ *
+ * @returns canvas dataURL (or fallback string)
+ */
+export const getCanvasFingerprint = (): string => {
     // If canvas is not supported simply return a static string
     if (!isCanvasSupported()) return 'broprint.js';
 

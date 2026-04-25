@@ -1,5 +1,14 @@
 // reference - https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript#answer-52171480
-// output - 6533356943844037
+
+/**
+ * Fast, non-cryptographic 53-bit hash. Returns a deterministic integer in
+ * the range [0, 2^53). Suitable for fingerprint hashing — not for security.
+ *
+ * @param str input string to hash
+ * @param seed optional seed (default 0); different seeds produce different hashes
+ * @returns 53-bit integer hash
+ * @example cyrb53('hello') // 17202805693082
+ */
 export const cyrb53 = (str: string, seed: number = 0): number => {
     let h1 = 0xdeadbeef ^ seed;
     let h2 = 0x41c6ce57 ^ seed;

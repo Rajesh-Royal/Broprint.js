@@ -1,6 +1,12 @@
 import { cyrb53 } from './code/EncryptDecrypt';
 import { getCanvasFingerprint } from './code/GenerateCanvasFingerprint';
-import { generateAudioFingerprint } from './code/generateTheAudioPrints';
+import { getAudioFingerprint } from './code/generateTheAudioPrints';
+
+// Individual building blocks for advanced usage. Tree-shakeable when
+// `sideEffects: false` is set in package.json (#31).
+export { cyrb53 } from './code/EncryptDecrypt';
+export { getCanvasFingerprint, isCanvasSupported } from './code/GenerateCanvasFingerprint';
+export { getAudioFingerprint } from './code/generateTheAudioPrints';
 
 export interface BroprintOptions {
     /** Include audio fingerprinting signal (default: true) */
@@ -33,7 +39,7 @@ export async function getCurrentBrowserFingerPrint(options: BroprintOptions = {}
 
     if (useAudio) {
         try {
-            const audioResult = await generateAudioFingerprint();
+            const audioResult = await getAudioFingerprint();
             const combined = useCanvas
                 ? window.btoa(audioResult) + getCanvasFingerprint()
                 : window.btoa(audioResult);
