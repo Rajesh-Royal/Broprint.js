@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. The format 
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-04-26
+
 ### Breaking
 
 - Audio fingerprint output no longer prefixed with the literal string `"null"` ([#23]). The accumulator was initialized to `null` and used `+=`, so every v2 audio fingerprint started with `"null"` before the actual sum. Final fingerprints will differ from v2 — see [`MIGRATION.md`](./MIGRATION.md).
@@ -137,7 +139,8 @@ All notable changes to this project will be documented in this file. The format 
 - Version upgrade.
 - New types added.
 
-[Unreleased]: https://github.com/Rajesh-Royal/Broprint.js/compare/v2.2.1...HEAD
+[Unreleased]: https://github.com/Rajesh-Royal/Broprint.js/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/Rajesh-Royal/Broprint.js/compare/v2.2.1...v3.0.0
 [2.2.1]: https://github.com/Rajesh-Royal/Broprint.js/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/Rajesh-Royal/Broprint.js/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/Rajesh-Royal/Broprint.js/compare/v2.0.0...v2.1.0
