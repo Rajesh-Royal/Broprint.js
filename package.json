@@ -20,7 +20,9 @@
     "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
     "build": "npm run build:bundle && npm run build:types",
     "build:npm": "npm run build:bundle && npm run build:types",
-    "test": "echo \"Error: no test specified\" && exit 1 "
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -60,7 +62,9 @@
     "README.MD"
   ],
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.9",
     "tsup": "^8.5.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vitest": "^2.1.9"
   }
 }
