@@ -3,48 +3,39 @@ import { getCanvasFingerprint } from './code/GenerateCanvasFingerprint';
 import { generateAudioFingerprint } from './code/generateTheAudioPrints';
 
 /**
- * This functions working
- * @Param {null}
- * @return {Promise<string>} - resolve(string)
+ * Generate a stable fingerprint for the current browser.
+ *
+ * Combines the audio fingerprint with the canvas fingerprint and hashes the
+ * concatenation with cyrb53. If audio fingerprinting fails (e.g. unsupported
+ * browser), falls back to a canvas-only fingerprint.
+ *
+ * @returns Promise resolving to the fingerprint as a string.
+ * @throws if both audio and canvas fingerprinting fail.
  */
-export const getCurrentBrowserFingerPrint = (): Promise<string> => {
-    /**
-     * @return {Promise} - a frequency number 120.256896523
-     * @reference - https://fingerprintjs.com/blog/audio-fingerprinting/
-     */
-    const getTheAudioPrints = generateAudioFingerprint();
-
-    /**
-     *
-     * @param {null}
-     * @return {Promise<string>} - and sha512 hashed string
-     */
-    const DevicePrints: Promise<string> = new Promise((resolve, reject) => {
-        getTheAudioPrints
-            .then((audioChannelResult) => {
-                const fingerprint =
-                    window.btoa(audioChannelResult as string) + getCanvasFingerprint();
-                // using btoa to hash the values to looks better readable
-                resolve(cyrb53(fingerprint, 0) as unknown as string);
-            })
-            .catch(() => {
-                try {
-                    // if failed with audio fingerprint then resolve only with canvas fingerprint
-                    resolve(cyrb53(getCanvasFingerprint()).toString());
-                } catch (error) {
-                    reject('Failed to generate the finger print of this browser');
-                }
-            });
-    });
-    return DevicePrints;
-};
+export async function getCurrentBrowserFingerPrint(): Promise<string> {
+    try {
+        const audioResult = await generateAudioFingerprint();
+        const combined = window.btoa(audioResult) + getCanvasFingerprint();
+        return cyrb53(combined, 0).toString();
+    } catch {
+        try {
+            return cyrb53(getCanvasFingerprint(), 0).toString();
+        } catch {
+            throw new Error('Failed to generate the fingerprint of this browser');
+        }
+    }
+}
 
 // Expose as a global for classic <script src> usage when a UMD/IIFE build is loaded.
-// This is safe and idempotent; bundlers/tree-shakers ignore this in ESM contexts.
+// Bundlers/tree-shakers ignore this in ESM contexts.
 try {
-    if (typeof window !== 'undefined' && !(window as any).getCurrentBrowserFingerPrint) {
-        (window as any).getCurrentBrowserFingerPrint = getCurrentBrowserFingerPrint;
+    if (
+        typeof window !== 'undefined' &&
+        !(window as unknown as Record<string, unknown>).getCurrentBrowserFingerPrint
+    ) {
+        (window as unknown as Record<string, unknown>).getCurrentBrowserFingerPrint =
+            getCurrentBrowserFingerPrint;
     }
-} catch (_) {
+} catch {
     /* no-op */
 }
