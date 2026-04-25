@@ -1,7 +1,6 @@
 // this file is a driver file for testing in local
 // this will not be used for npm build
 
- 
 import { cyrb53 } from './EncryptDecrypt';
 import { getCanvasFingerprint } from './GenerateCanvasFingerprint';
 import { generateTheAudioFingerPrint } from './generateTheAudioPrints';
