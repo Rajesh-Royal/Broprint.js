@@ -25,16 +25,9 @@ export const getCurrentBrowserFingerPrint = (): Promise<string> => {
      */
     const DevicePrints: Promise<string> = new Promise((resolve, reject) => {
         getTheAudioPrints
-            .then(async (audioChannelResult) => {
-                let fingerprint = '';
-                // @todo - make fingerprint unique in brave browser
-                if ((navigator.brave && (await navigator.brave.isBrave())) || false)
-                    fingerprint =
-                        window.btoa(audioChannelResult as string) + getCanvasFingerprint();
-                else
-                    fingerprint =
-                        window.btoa(audioChannelResult as string) + getCanvasFingerprint();
-
+            .then((audioChannelResult) => {
+                const fingerprint =
+                    window.btoa(audioChannelResult as string) + getCanvasFingerprint();
                 // using btoa to hash the values to looks better readable
                 resolve(cyrb53(fingerprint, 0) as unknown as string);
             })
@@ -49,14 +42,6 @@ export const getCurrentBrowserFingerPrint = (): Promise<string> => {
     });
     return DevicePrints;
 };
-
-declare global {
-    interface Navigator {
-        brave: {
-            isBrave: () => {};
-        };
-    }
-}
 
 // Expose as a global for classic <script src> usage when a UMD/IIFE build is loaded.
 // This is safe and idempotent; bundlers/tree-shakers ignore this in ESM contexts.
