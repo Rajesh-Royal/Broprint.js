@@ -31,9 +31,25 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "size": "size-limit",
+    "size:why": "size-limit --why",
     "prepare": "husky",
     "prepublishOnly": "npm run build"
   },
+  "size-limit": [
+    {
+      "path": "lib/index.mjs",
+      "limit": "2 KB"
+    },
+    {
+      "path": "lib/index.js",
+      "limit": "2 KB"
+    },
+    {
+      "path": "lib/index.global.js",
+      "limit": "2 KB"
+    }
+  ],
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
@@ -79,6 +95,7 @@
     "README.MD"
   ],
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^12.1.0",
     "@vitest/coverage-v8": "^2.1.9",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
@@ -86,6 +103,7 @@
     "jsdom": "^25.0.1",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
+    "size-limit": "^12.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.4.0",
     "typescript-eslint": "^8.59.0",

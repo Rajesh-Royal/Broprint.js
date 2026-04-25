@@ -31,5 +31,5 @@ jobs:
         run: npx tsc --noEmit
       - name: Build
         run: npm run build:npm
-      - name: Package size (approx)
-        run: du -sh lib || true
+      - name: Bundle size budget
+        run: npm run size
