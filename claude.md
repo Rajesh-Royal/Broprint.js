@@ -1,0 +1,2 @@
+- We are running inside Mac OS
+- While making commits do not put Co-Authored-By at all
