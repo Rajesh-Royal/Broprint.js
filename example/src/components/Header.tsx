@@ -28,7 +28,7 @@ export const Header = () => {
         <motion.a href="https://github.com/Rajesh-Royal/Broprint.js" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}>
         <GithubSvgIcon className="w-6 h-6 fill-[#22d3ee]" />
         </motion.a>
-        <motion.a href="https://x.com/Raj_896" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}>
+        <motion.a href="https://x.com/royalreplaced" target="_blank" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} style={{ color: '#22d3ee' }}>
         <XSvgIcon className="w-6 h-6 fill-[#22d3ee]" />
         </motion.a>
       </div>

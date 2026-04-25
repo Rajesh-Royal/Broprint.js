@@ -6,7 +6,7 @@
  <a href="https://www.npmjs.com/package/@rajesh896/broprint.js">
     <img src="https://img.shields.io/npm/v/@rajesh896/broprint.js" alt="Current NPM version">
   </a>
-    <a href="https://twitter.com/intent/tweet?text=The world's easiest, smallest and powerful visitor identifier for browsers.&url=https://github.com/Rajesh-Royal/Broprint.js&hashtags=javascript,opensource,js,webdev,developers"><img src="http://randojs.com/images/tweetShield.svg" alt="Tweet" height="20"/></a>
+    <a href="https://x.com/intent/tweet?text=The world's easiest, smallest and powerful visitor identifier for browsers.&url=https://github.com/Rajesh-Royal/Broprint.js&hashtags=javascript,opensource,js,webdev,developers"><img src="http://randojs.com/images/tweetShield.svg" alt="Tweet" height="20"/></a>
 </p><br/><br/>
 
 <p align="center">
