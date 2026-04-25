@@ -1,0 +1,6 @@
+lib/
+node_modules/
+example/
+docs/
+package-lock.json
+*.min.js
