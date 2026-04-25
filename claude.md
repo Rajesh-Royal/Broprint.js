@@ -1,2 +1,3 @@
 - We are running inside Mac OS
 - While making commits do not put Co-Authored-By at all
+- When one issue fix is complete then use Compact command to compact the conversation, to keep only relevant part.
