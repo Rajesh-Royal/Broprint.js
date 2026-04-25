@@ -59,6 +59,7 @@ The build produces ESM, CJS, and IIFE bundles plus type declarations under `lib/
 | Bundles only           | `npm run build:bundle` |
 | Bundle size budget     | `npm run size`         |
 | Why is the bundle big? | `npm run size:why`     |
+| Generate API docs      | `npm run docs`         |
 
 Typical loop:
 

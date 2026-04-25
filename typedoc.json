@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "name": "Broprint.js",
+  "readme": "README.MD",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "skipErrorChecking": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/Rajesh-Royal/Broprint.js",
+    "npm": "https://www.npmjs.com/package/@rajesh896/broprint.js"
+  }
+}

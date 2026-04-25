@@ -33,6 +33,7 @@
     "test:coverage": "vitest run --coverage",
     "size": "size-limit",
     "size:why": "size-limit --why",
+    "docs": "typedoc",
     "prepare": "husky",
     "prepublishOnly": "npm run build"
   },
@@ -105,6 +106,7 @@
     "prettier": "^3.8.3",
     "size-limit": "^12.1.0",
     "tsup": "^8.5.0",
+    "typedoc": "^0.28.19",
     "typescript": "^5.4.0",
     "typescript-eslint": "^8.59.0",
     "vitest": "^2.1.9"
