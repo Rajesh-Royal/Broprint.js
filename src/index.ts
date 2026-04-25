@@ -1,6 +1,6 @@
 import { cyrb53 } from './code/EncryptDecrypt';
 import { getCanvasFingerprint } from './code/GenerateCanvasFingerprint';
-import { generateTheAudioFingerPrint } from './code/generateTheAudioPrints';
+import { generateAudioFingerprint } from './code/generateTheAudioPrints';
 
 /**
  * This functions working
@@ -12,11 +12,7 @@ export const getCurrentBrowserFingerPrint = (): Promise<string> => {
      * @return {Promise} - a frequency number 120.256896523
      * @reference - https://fingerprintjs.com/blog/audio-fingerprinting/
      */
-    const getTheAudioPrints = new Promise((resolve, reject) => {
-        generateTheAudioFingerPrint.run(function (fingerprint: any) {
-            resolve(fingerprint);
-        });
-    });
+    const getTheAudioPrints = generateAudioFingerprint();
 
     /**
      *
