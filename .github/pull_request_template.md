@@ -1,5 +1,9 @@
 <!--
-Thank you for contributing! Please fill out the checklist below.
+Thank you for contributing! Please read CONTRIBUTING.md before opening a PR
+(branch naming, commit conventions, dev workflow):
+https://github.com/Rajesh-Royal/Broprint.js/blob/develop/CONTRIBUTING.md
+
+Then fill out the checklist below.
 -->
 
 ## Summary
@@ -16,8 +20,9 @@ Explain the change (what & why).
 
 ## Checklist
 
-- [ ] Code builds locally (npm run build:npm)
-- [ ] Linting/format (if applicable) passes
+- [ ] I have read [CONTRIBUTING.md](../blob/develop/CONTRIBUTING.md)
+- [ ] Code builds locally (`npm run build`)
+- [ ] `npm run lint` and `npm run format:check` pass
 - [ ] Updated documentation (README / docs) if needed
 - [ ] Added tests or explanation why not (project currently lacks tests)
 - [ ] Version bump NOT included (handled by release process)

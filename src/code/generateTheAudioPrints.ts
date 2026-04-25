@@ -1,98 +1,89 @@
-//  ref = https://github.com/rickmacgillis/audio-fingerprint/blob/master/audio-fingerprinting.js
-// @ts-nocheck
-export const generateTheAudioFingerPrint = (function () {
+// ref - https://github.com/rickmacgillis/audio-fingerprint/blob/master/audio-fingerprinting.js
+// Per-call function-scoped state. Concurrent invocations don't share fingerprint/callback.
 
-    var context = null;
-    var currentTime = null;
-    var oscillator = null;
-    var compressor = null;
-    var fingerprint = null;
-    var callback = null
+type OfflineAudioContextCtor = typeof OfflineAudioContext;
 
-    function run(cb, debug = false) {
+declare global {
+    interface Window {
+        webkitOfflineAudioContext?: OfflineAudioContextCtor;
+    }
+}
 
-        callback = cb;
+type CompressorParamName = 'threshold' | 'knee' | 'ratio' | 'attack' | 'release';
 
+const setCompressorParam = (
+    compressor: DynamicsCompressorNode,
+    name: CompressorParamName,
+    value: number,
+    when: number
+): void => {
+    const param = compressor[name] as AudioParam | undefined;
+    if (param && typeof param.setValueAtTime === 'function') {
+        param.setValueAtTime(value, when);
+    }
+};
+
+/**
+ * Generate an audio fingerprint by rendering a fixed oscillator + compressor
+ * graph through OfflineAudioContext and summing a slice of the output buffer.
+ * Different browsers/audio stacks produce subtly different float values,
+ * yielding a stable per-browser identifier.
+ *
+ * Each invocation creates its own OfflineAudioContext and resolves
+ * independently — safe for concurrent calls.
+ *
+ * @returns Promise resolving to the fingerprint as a string
+ * @throws if OfflineAudioContext is not available in the runtime
+ */
+export const getAudioFingerprint = (): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
         try {
+            const Ctor: OfflineAudioContextCtor | undefined =
+                typeof window !== 'undefined'
+                    ? window.OfflineAudioContext || window.webkitOfflineAudioContext
+                    : undefined;
 
-            setup();
+            if (!Ctor) {
+                reject(new Error('OfflineAudioContext is not supported in this environment'));
+                return;
+            }
+
+            const context = new Ctor(1, 44100, 44100);
+            const currentTime = context.currentTime;
+
+            const oscillator = context.createOscillator();
+            oscillator.type = 'triangle';
+            oscillator.frequency.setValueAtTime(10000, currentTime);
+
+            const compressor = context.createDynamicsCompressor();
+            setCompressorParam(compressor, 'threshold', -50, currentTime);
+            setCompressorParam(compressor, 'knee', 40, currentTime);
+            setCompressorParam(compressor, 'ratio', 12, currentTime);
+            setCompressorParam(compressor, 'attack', 0, currentTime);
+            setCompressorParam(compressor, 'release', 0.25, currentTime);
 
             oscillator.connect(compressor);
             compressor.connect(context.destination);
-
             oscillator.start(0);
+
+            context.oncomplete = (event: OfflineAudioCompletionEvent) => {
+                // Initialize accumulator to 0 (numeric). Previous code initialized to null
+                // and used `+=`, which coerced the first concatenation to "null0.0001…",
+                // baking the literal string "null" into every fingerprint. Fixing this
+                // changes the audio fingerprint output for all consumers — breaking change,
+                // see MIGRATION.md (v3.0.0).
+                let sum = 0;
+                const data = event.renderedBuffer.getChannelData(0);
+                for (let i = 4500; i < 5000; i++) {
+                    sum += Math.abs(data[i]);
+                }
+                compressor.disconnect();
+                resolve(sum.toString());
+            };
+
             context.startRendering();
-
-            context.oncomplete = onComplete;
-
-        } catch (e) {
-
-            if (debug) {
-                throw e;
-            }
-
+        } catch (error) {
+            reject(error);
         }
-    }
-
-    function setup() {
-        setContext();
-        currentTime = context.currentTime;
-        setOscillator();
-        setCompressor();
-    }
-
-    function setContext() {
-        var audioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-        context = new audioContext(1, 44100, 44100);
-    }
-
-    function setOscillator() {
-        oscillator = context.createOscillator();
-        oscillator.type = "triangle";
-        oscillator.frequency.setValueAtTime(10000, currentTime);
-    }
-
-    function setCompressor() {
-        compressor = context.createDynamicsCompressor();
-
-        setCompressorValueIfDefined('threshold', -50);
-        setCompressorValueIfDefined('knee', 40);
-        setCompressorValueIfDefined('ratio', 12);
-        setCompressorValueIfDefined('reduction', -20);
-        setCompressorValueIfDefined('attack', 0);
-        setCompressorValueIfDefined('release', .25);
-    }
-
-    function setCompressorValueIfDefined(item, value) {
-        if (compressor[item] !== undefined && typeof compressor[item].setValueAtTime === 'function') {
-            compressor[item].setValueAtTime(value, context.currentTime);
-        }
-    }
-
-    function onComplete(event) {
-        generateFingerprints(event);
-        compressor.disconnect();
-    }
-
-    function generateFingerprints(event) {
-        var output = null;
-        for (var i = 4500; 5e3 > i; i++) {
-
-            var channelData = event.renderedBuffer.getChannelData(0)[i];
-            output += Math.abs(channelData);
-
-        }
-
-        fingerprint = output.toString();
-
-        if (typeof callback === 'function') {
-            return callback(fingerprint);
-        }
-    }
-
-    return {
-        run: run
-    };
-
-})();
-
+    });
+};

@@ -1,67 +1,74 @@
-import { cyrb53 } from "./code/EncryptDecrypt";
-import { getCanvasFingerprint } from "./code/GenerateCanvasFingerprint";
-import { generateTheAudioFingerPrint } from "./code/generateTheAudioPrints";
+import { cyrb53 } from './code/EncryptDecrypt';
+import { getCanvasFingerprint } from './code/GenerateCanvasFingerprint';
+import { getAudioFingerprint } from './code/generateTheAudioPrints';
 
+// Individual building blocks for advanced usage. Tree-shakeable when
+// `sideEffects: false` is set in package.json (#31).
+export { cyrb53 } from './code/EncryptDecrypt';
+export { getCanvasFingerprint, isCanvasSupported } from './code/GenerateCanvasFingerprint';
+export { getAudioFingerprint } from './code/generateTheAudioPrints';
 
+export interface BroprintOptions {
+    /** Include audio fingerprinting signal (default: true) */
+    useAudio?: boolean;
+    /** Include canvas fingerprinting signal (default: true) */
+    useCanvas?: boolean;
+    /** Custom seed for the hash function (default: 0) */
+    seed?: number;
+}
 
 /**
- * This functions working
- * @Param {null}
- * @return {Promise<string>} - resolve(string)
+ * Generate a stable fingerprint for the current browser.
+ *
+ * Combines the configured signals (audio + canvas by default) and hashes the
+ * result with cyrb53. If audio is enabled but fails (e.g. unsupported browser)
+ * and canvas is also enabled, falls back to a canvas-only fingerprint.
+ *
+ * @param options optional signal selection and hash seed.
+ * @returns Promise resolving to the fingerprint as a string.
+ * @throws if no signals are enabled, or if all enabled signals fail.
  */
-export const getCurrentBrowserFingerPrint = (): Promise<string> => {
+export async function getCurrentBrowserFingerPrint(options: BroprintOptions = {}): Promise<string> {
+    const { useAudio = true, useCanvas = true, seed = 0 } = options;
 
-    /**
-     * @return {Promise} - a frequency number 120.256896523
-     * @reference - https://fingerprintjs.com/blog/audio-fingerprinting/
-     */
-    const getTheAudioPrints = new Promise((resolve, reject) => {
-        generateTheAudioFingerPrint.run(function (fingerprint: any) {
-            resolve(fingerprint);
-        });
-    });
+    if (!useAudio && !useCanvas) {
+        throw new Error(
+            'getCurrentBrowserFingerPrint: at least one of useAudio or useCanvas must be true'
+        );
+    }
 
-    /**
-     * 
-     * @param {null}
-     * @return {Promise<string>} - and sha512 hashed string
-     */
-    const DevicePrints: Promise<string> = new Promise((resolve, reject) => {
-        getTheAudioPrints.then(async (audioChannelResult) => {
-
-            let fingerprint = "";
-            // @todo - make fingerprint unique in brave browser
-            if ((navigator.brave && await navigator.brave.isBrave() || false))
-                fingerprint = window.btoa(audioChannelResult as string) + getCanvasFingerprint()
-            else
-                fingerprint = window.btoa(audioChannelResult as string) + getCanvasFingerprint()
-
-            // using btoa to hash the values to looks better readable
-            resolve(cyrb53(fingerprint, 0) as unknown as string);
-        }).catch(() => {
-            try {
-                // if failed with audio fingerprint then resolve only with canvas fingerprint
-                resolve(cyrb53(getCanvasFingerprint()).toString());
-            } catch (error) {
-                reject("Failed to generate the finger print of this browser");
+    if (useAudio) {
+        try {
+            const audioResult = await getAudioFingerprint();
+            const combined = useCanvas
+                ? window.btoa(audioResult) + getCanvasFingerprint()
+                : window.btoa(audioResult);
+            return cyrb53(combined, seed).toString();
+        } catch (audioError) {
+            if (!useCanvas) {
+                throw audioError;
             }
-        })
-    });
-    return DevicePrints;
-};
+            // fall through to canvas-only fallback
+        }
+    }
 
-declare global {
-    interface Navigator {
-        brave: {
-            isBrave: () => {}
-        };
+    try {
+        return cyrb53(getCanvasFingerprint(), seed).toString();
+    } catch {
+        throw new Error('Failed to generate the fingerprint of this browser');
     }
 }
 
 // Expose as a global for classic <script src> usage when a UMD/IIFE build is loaded.
-// This is safe and idempotent; bundlers/tree-shakers ignore this in ESM contexts.
+// Bundlers/tree-shakers ignore this in ESM contexts.
 try {
-    if (typeof window !== 'undefined' && !(window as any).getCurrentBrowserFingerPrint) {
-        (window as any).getCurrentBrowserFingerPrint = getCurrentBrowserFingerPrint;
+    if (
+        typeof window !== 'undefined' &&
+        !(window as unknown as Record<string, unknown>).getCurrentBrowserFingerPrint
+    ) {
+        (window as unknown as Record<string, unknown>).getCurrentBrowserFingerPrint =
+            getCurrentBrowserFingerPrint;
     }
-} catch (_) { /* no-op */ }
+} catch {
+    /* no-op */
+}

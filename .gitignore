@@ -1,1 +1,5 @@
 /node_modules
+/coverage
+/.vscode
+/todo.md
+/docs/api

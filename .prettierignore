@@ -1,0 +1,8 @@
+lib/
+node_modules/
+example/
+docs/
+coverage/
+.husky/
+package-lock.json
+*.min.js

@@ -1,6 +1,6 @@
 {
   "name": "@rajesh896/broprint.js",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "The world's easiest, smallest and powerful visitor identifier for browsers.",
   "main": "./lib/index.js",
   "module": "./lib/index.mjs",
@@ -9,17 +9,56 @@
     ".": {
       "import": "./lib/index.mjs",
       "require": "./lib/index.js",
-      "default": "./lib/index.mjs"
+      "default": "./lib/index.mjs",
+      "types": "./lib/index.d.ts"
     },
     "./global": "./lib/index.global.js"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
   },
   "private": false,
   "scripts": {
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir lib --declarationMap false",
-  "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
+    "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
     "build": "npm run build:bundle && npm run build:types",
     "build:npm": "npm run build:bundle && npm run build:types",
-    "test": "echo \"Error: no test specified\" && exit 1 "
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "size": "size-limit",
+    "size:why": "size-limit --why",
+    "docs": "typedoc",
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
+  },
+  "size-limit": [
+    {
+      "path": "lib/index.mjs",
+      "limit": "2 KB"
+    },
+    {
+      "path": "lib/index.js",
+      "limit": "2 KB"
+    },
+    {
+      "path": "lib/index.global.js",
+      "limit": "2 KB"
+    }
+  ],
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
@@ -28,16 +67,14 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "bin": {
-    "getDeviceId()": "./lib/index.js"
-  },
   "keywords": [
+    "browser-fingerprint",
     "browserfingerprint",
     "fingerprinting",
     "jsfingerprint",
     "uniquebrowserid",
-    "nodejs",
-    "cryptography",
+    "device-id",
+    "zero-dependency",
     "fraud-detection",
     "canvas-fingerprinting",
     "audio-fingerprinting",
@@ -59,7 +96,19 @@
     "README.MD"
   ],
   "devDependencies": {
+    "@size-limit/preset-small-lib": "^12.1.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "jsdom": "^25.0.1",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
+    "size-limit": "^12.1.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.4.0"
+    "typedoc": "^0.28.19",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.59.0",
+    "vitest": "^2.1.9"
   }
 }
