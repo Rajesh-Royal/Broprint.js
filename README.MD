@@ -2,139 +2,190 @@
 <p align="center">The world's easiest, smallest and powerful visitor identifier for browsers.</p>
 
 <p align="center">
- <a href="https://github.com/Rajesh-Royal/Broprint.js"><img src="https://img.shields.io/badge/total%20size-2.12%20KB-brightgreen" height="20"/></a>
- <a href="https://www.npmjs.com/package/@rajesh896/broprint.js">
-    <img src="https://img.shields.io/npm/v/@rajesh896/broprint.js" alt="Current NPM version">
+  <a href="https://www.npmjs.com/package/@rajesh896/broprint.js">
+    <img src="https://img.shields.io/npm/v/@rajesh896/broprint.js" alt="npm version">
   </a>
-    <a href="https://x.com/intent/tweet?text=The world's easiest, smallest and powerful visitor identifier for browsers.&url=https://github.com/Rajesh-Royal/Broprint.js&hashtags=javascript,opensource,js,webdev,developers"><img src="http://randojs.com/images/tweetShield.svg" alt="Tweet" height="20"/></a>
-</p><br/><br/>
+  <a href="https://github.com/Rajesh-Royal/Broprint.js/actions/workflows/ci.yml">
+    <img src="https://github.com/Rajesh-Royal/Broprint.js/actions/workflows/ci.yml/badge.svg?branch=develop" alt="CI status">
+  </a>
+  <a href="https://codecov.io/gh/Rajesh-Royal/Broprint.js">
+    <img src="https://codecov.io/gh/Rajesh-Royal/Broprint.js/branch/develop/graph/badge.svg" alt="Coverage">
+  </a>
+  <a href="https://bundlephobia.com/package/@rajesh896/broprint.js">
+    <img src="https://img.shields.io/bundlephobia/minzip/@rajesh896/broprint.js" alt="Minzipped size">
+  </a>
+  <a href="https://github.com/Rajesh-Royal/Broprint.js/blob/develop/LICENSE">
+    <img src="https://img.shields.io/npm/l/@rajesh896/broprint.js" alt="License">
+  </a>
+  <a href="https://x.com/intent/tweet?text=The world's easiest, smallest and powerful visitor identifier for browsers.&url=https://github.com/Rajesh-Royal/Broprint.js&hashtags=javascript,opensource,js,webdev,developers"><img src="http://randojs.com/images/tweetShield.svg" alt="Tweet" height="20"/></a>
+</p>
 
 <p align="center">
-This package generates a unique ID/String for different browsers. Like chrome, Firefox or any other browsers which support `canvas` and `audio` fingerprinting. You can easily do the browser fingerprinting with this library. Its small and minimal.</p>
+  Generate a stable per-browser identifier from <strong>canvas</strong> + <strong>audio</strong> fingerprints, hashed with a fast, zero-dependency 53-bit hash. No tracking pixels, no third-party services, no runtime dependencies.
+</p>
 
-<p align="center"><a href="https://github.com/Rajesh-Royal/Broprint.js"><img src="https://user-images.githubusercontent.com/24524924/163906729-f34e193a-e202-43ae-ba4b-c460da6cc911.gif" width="100%"/></a><a href="#"><img src="http://randojs.com/images/dropShadow.png" width="100%"/></a></p><br/>
+<p align="center"><a href="https://github.com/Rajesh-Royal/Broprint.js"><img src="https://user-images.githubusercontent.com/24524924/163906729-f34e193a-e202-43ae-ba4b-c460da6cc911.gif" width="100%"/></a></p>
 
-<p align="center"><a href="https://codesandbox.io/s/browser-fingerprinting-generate-unique-device-id-or-browser-id-507n2v" target="_blank">CodeSandbox, </a>
-<a href="https://broprintjs.netlify.app/" target="_blank" >Live Demo</a> </p>
+<p align="center"><a href="https://codesandbox.io/s/browser-fingerprinting-generate-unique-device-id-or-browser-id-507n2v" target="_blank">CodeSandbox</a> · <a href="https://broprintjs.netlify.app/" target="_blank">Live Demo</a></p>
 
-> ⚠ The code is completely open source and not relating to anyone, created in my spare time. [only for educational purpose]
+> ⚠️ **Not a security primitive.** The hash (`cyrb53`) is a fast, non-cryptographic checksum. Use it for visitor identification, analytics, and fraud-signal heuristics — not for authentication, password storage, or anything that requires collision resistance.
 
-> The algorithms used to encrypt/decrypt data - `murmurhash3_32_gc`, `cyrb53` and `javaHashCode`. Code is inside `.src/code/EncryptDecrypt.js`.
+> 📦 **Migrating from v2?** See [`MIGRATION.md`](./MIGRATION.md) for the breaking changes in v3.0.0.
 
-## :hear_no_evil:  What's all the hullabaloo?  
+---
 
-<a href="https://broprintjs.netlify.app/" target="_blank">Broprint.js</a> helps JavaScript developers code visitors identifier more simply, readably, and securely. Whether you need to find a unique visitor, do analytics, browser fingerprinting, or do anything of the like while even preventing frauds, we've got you covered at a **cryptographically strong** level. The best part? Our library is extremely lightweight and developer friendly- which means it won't take a toll on your project, and it's uber-simple to implement. This library works on the concept of **canvas** fingerprint and **audio** fingerprint, the final result which a user get is the combination of **audio and canvas fingerprint**. We are using **cryptojs** under the hood for encryptions but you can easily tweek the library to remove the dependency.  <br/><br/><br/>
-</br>
+## Install
 
-## :zap:  Fast implementation  
-
-   **Step 1:** Install using npm or yarn:<br/>
-  
-Using npm:
-
-```JavaScript
-//Install:
-npm i @rajesh896/broprint.js
-```
-
-Using Yarn:
-
-```Javascript
-//Install:
-yarn add @rajesh896/broprint.js
-```
-     **Step 1:** Install using npm, yarn, or use via CDN:<br/>
-
-### Using npm:
 ```sh
 npm i @rajesh896/broprint.js
-```
-
-### Using Yarn:
-```sh
+# or
 yarn add @rajesh896/broprint.js
+# or
+pnpm add @rajesh896/broprint.js
 ```
 
-### Using CDN (jsDelivr) (v2.2.0+)
-You can load Broprint.js directly in the browser in two ways:
+### CDN (no install)
 
 ESM (modern browsers):
 
 ```html
 <script type="module">
     import { getCurrentBrowserFingerPrint } from 'https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.mjs';
-    getCurrentBrowserFingerPrint().then(fp => console.log('Fingerprint:', fp));
+    getCurrentBrowserFingerPrint().then((fp) => console.log('Fingerprint:', fp));
 </script>
 ```
 
-Classic global (no module support needed):
+Classic global build (no module support needed):
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@rajesh896/broprint.js@latest/lib/index.global.js"></script>
 <script>
-    getCurrentBrowserFingerPrint().then(fp => console.log('Fingerprint (global):', fp));
+    Broprint.getCurrentBrowserFingerPrint().then((fp) => console.log('Fingerprint:', fp));
 </script>
 ```
-<br/>
 
-<br/><br/>
+## Quick start
 
-## :tada:  Examples  
->
->### **In Reactjs**
+```js
+import { getCurrentBrowserFingerPrint } from '@rajesh896/broprint.js';
 
-```javascript
-import { getCurrentBrowserFingerPrint } from "@rajesh896/broprint.js";
-
-getCurrentBrowserFingerPrint().then((fingerprint) => {
-    // fingerprint is your unique browser id.
-    // This is well tested
-
-    // the result you receive here is the combination of Canvas fingerprint and audio fingerprint.
-})
+const fingerprint = await getCurrentBrowserFingerPrint();
+// → "1234567890123456" — a stable numeric string for this browser
 ```
 
-<br/>
+### Disable a signal
 
->### Using this script in a plain HTML file (local install)
+```js
+// canvas-only (skip audio entirely)
+await getCurrentBrowserFingerPrint({ useAudio: false });
 
- 1. Execute `npm i @rajesh896/broprint.js`
- 2. Then -
+// audio-only
+await getCurrentBrowserFingerPrint({ useCanvas: false });
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FingerPrint</title>
-</head>
-
-<body>
-    <script type="module">
-    import("./node_modules/@rajesh896/broprint.js/lib/index.mjs").then((module) => {
-            module.getCurrentBrowserFingerPrint().then((fingerprint) => {
-                console.log(fingerprint);
-            })
-        })
-    </script>
-</body>
-
-</html>
+// custom seed (e.g. to namespace fingerprints per-app)
+await getCurrentBrowserFingerPrint({ seed: 42 });
 ```
 
-> Note: Since v2.0 crypto-js was removed. v2.2.0 introduced multi-format builds (ESM, CJS, Global) and proper CDN usage.
+### Use the building blocks directly
 
-If you want to use it in simple `.html` file, please read the `index.html` file in the root directory.
+The individual signal generators and the hash function are also exported, so you can compose your own pipeline:
 
-This repository is for educational and demonstration purposes only!
+```js
+import {
+    getCanvasFingerprint,
+    getAudioFingerprint,
+    cyrb53,
+    isCanvasSupported
+} from '@rajesh896/broprint.js';
 
-## :clap:  Supporters
+const canvas = getCanvasFingerprint(); // sync, returns canvas dataURL
+const audio = await getAudioFingerprint(); // async, returns numeric string
+const hash = cyrb53(canvas + audio); // → number in [0, 2^53)
+```
+
+## API
+
+### `getCurrentBrowserFingerPrint(options?)`
+
+| Option       | Type      | Default | Description                                                                  |
+| ------------ | --------- | ------- | ---------------------------------------------------------------------------- |
+| `useAudio`   | `boolean` | `true`  | Include the audio fingerprint signal.                                        |
+| `useCanvas`  | `boolean` | `true`  | Include the canvas fingerprint signal.                                       |
+| `seed`       | `number`  | `0`     | Custom seed for the cyrb53 hash. Use to namespace fingerprints per-app.      |
+
+**Returns:** `Promise<string>` — a stable numeric string (53-bit hash, base-10).
+
+**Throws:**
+
+- If both `useAudio` and `useCanvas` are `false` (no signals selected).
+- If the only enabled signal fails (e.g. `useCanvas: false` on a browser that blocks `OfflineAudioContext`).
+- If audio fails **and** canvas also fails.
+
+If audio is enabled but fails (e.g. privacy mode blocks `OfflineAudioContext`) and canvas is also enabled, the function automatically falls back to a canvas-only fingerprint.
+
+### Named exports
+
+- `getCanvasFingerprint(): string` — render the canvas + return its `toDataURL()`.
+- `isCanvasSupported(): boolean` — feature-detects HTML5 canvas with a 2D context.
+- `getAudioFingerprint(): Promise<string>` — render an OfflineAudioContext graph + return the float sum as a string.
+- `cyrb53(str: string, seed?: number): number` — fast, non-cryptographic 53-bit hash.
+- `BroprintOptions` — TypeScript type for the options object.
+
+## How it works
+
+```
+                    ┌────────────────────────────────┐
+                    │         getAudioFingerprint    │
+  Audio entropy ──▶ │  OfflineAudioContext renders   │ ──▶ float sum (string)
+                    │  500 frames through a          │
+                    │  DynamicsCompressor.           │
+                    └────────────────────────────────┘
+                                     │
+                                     ▼  base64-encode
+                    ┌────────────────────────────────┐
+                    │       getCanvasFingerprint     │
+  Canvas entropy ──▶│  Draw layered text + shapes    │ ──▶ canvas.toDataURL()
+                    │  and read back the data URI    │
+                    │  (varies by GPU / font stack). │
+                    └────────────────────────────────┘
+                                     │
+                                     ▼  concat
+                    ┌────────────────────────────────┐
+                    │              cyrb53            │ ──▶ 53-bit numeric hash
+                    │  (custom, no deps, ~10 lines)  │     coerced to string
+                    └────────────────────────────────┘
+                                     │
+                                     ▼
+                              fingerprint
+```
+
+## Browser compatibility
+
+| API                     | Required for                | Support                                                  |
+| ----------------------- | --------------------------- | -------------------------------------------------------- |
+| `HTMLCanvasElement`     | canvas signal               | All modern browsers                                      |
+| `OfflineAudioContext`   | audio signal                | All modern browsers (`webkitOfflineAudioContext` fallback for older Safari) |
+| `Promise` / `async`     | always                      | All modern browsers (ES2017+)                            |
+
+Tested on the latest stable Chrome, Firefox, Safari, and Edge. Node ≥ 18 is required for the build/test toolchain.
+
+## Caveats
+
+- **Not unique forever.** A browser update, GPU driver change, OS upgrade, or "ungoogled" build can change the output. Treat the fingerprint as a stable signal *for a session/install*, not a permanent identity.
+- **Privacy modes can block signals.** Some privacy-focused browsers (Brave Strict, Tor, Firefox RFP) randomize or block the underlying APIs. The library falls back gracefully to the available signal, but the output will differ from the same user's "normal" browsing.
+- **Not for security.** The 53-bit `cyrb53` hash is fast and well-distributed but not cryptographically secure — collisions exist and the algorithm is reversible with effort. Don't use the output as a session token or password salt.
+
+## Contributing
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the dev setup, test/lint loop, and PR process. Bug reports and feature requests are welcome via GitHub Issues; security-sensitive reports should follow [`SECURITY.md`](./SECURITY.md).
+
+## License
+
+[MIT](./LICENSE) © Rajesh Royal
+
+---
 
 [![Stargazers repo roster for @Rajesh-Royal/Broprint.js](https://reporoster.com/stars/Rajesh-Royal/Broprint.js)](https://github.com/Rajesh-Royal/Broprint.js/stargazers)
-[![Forkers repo roster for @nRajesh-Royal/Broprint.js](https://reporoster.com/forks/Rajesh-Royal/Broprint.js)](https://github.com/Rajesh-Royal/Broprint.js/network/members)
-<p align="center"><a href="https://github.com/Rajesh-Royal/Broprint.js"><img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/></a></p>
-<br/>
-<p align="center"><a href="Rajesh-Royal/Broprint.js#"><img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="29"/></a></p>
+[![Forkers repo roster for @Rajesh-Royal/Broprint.js](https://reporoster.com/forks/Rajesh-Royal/Broprint.js)](https://github.com/Rajesh-Royal/Broprint.js/network/members)
+
+<p align="center"><a href="#broprintjs"><img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="29"/></a></p>
