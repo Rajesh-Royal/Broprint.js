@@ -43,9 +43,6 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "bin": {
-    "getDeviceId()": "./lib/index.js"
-  },
   "keywords": [
     "browserfingerprint",
     "fingerprinting",
