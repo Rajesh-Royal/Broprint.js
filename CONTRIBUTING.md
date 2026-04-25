@@ -57,6 +57,8 @@ The build produces ESM, CJS, and IIFE bundles plus type declarations under `lib/
 | Type-check + bundle    | `npm run build`        |
 | Type declarations only | `npm run build:types`  |
 | Bundles only           | `npm run build:bundle` |
+| Bundle size budget     | `npm run size`         |
+| Why is the bundle big? | `npm run size:why`     |
 
 Typical loop:
 
@@ -159,6 +161,7 @@ If audio fingerprinting fails (some browsers block `OfflineAudioContext` in priv
 ### Design constraints to respect
 
 - **No runtime dependencies.** Bundle size is a feature; the custom `cyrb53` is in-tree precisely to avoid pulling crypto-js.
+- **Bundle size budget: 2 KB brotli per format.** Enforced by `size-limit` (`npm run size`) and CI. Current sizes are well under (~1.0–1.3 KB). If a change needs to bump the budget, justify it in the PR description and bump deliberately.
 - **Deterministic output.** Don't introduce time-, locale-, or network-derived signals. `Date.now()` and randomness break the contract.
 - **Browser-only APIs.** No Node-only modules (`fs`, `path`, etc.) on the import path.
 - **Tree-shake friendly.** Avoid side-effectful top-level code beyond the one global-export shim already in `index.ts`.
