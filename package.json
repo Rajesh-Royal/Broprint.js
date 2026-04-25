@@ -22,9 +22,19 @@
     "build:npm": "npm run build:bundle && npm run build:types",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\"",
-    "test": "echo \"Error: no test specified\" && exit 1 "
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
+    "test": "echo \"Error: no test specified\" && exit 1 ",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "repository": {
     "type": "git",
@@ -66,6 +76,8 @@
   "devDependencies": {
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
     "tsup": "^8.5.0",
     "typescript": "^5.4.0",

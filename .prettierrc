@@ -5,5 +5,13 @@
     "trailingComma": "none",
     "semi": true,
     "printWidth": 100,
-    "endOfLine": "lf"
+    "endOfLine": "lf",
+    "overrides": [
+        {
+            "files": ["*.json", "*.yml", "*.yaml"],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
