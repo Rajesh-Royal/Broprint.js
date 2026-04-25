@@ -29,6 +29,17 @@ jobs:
         run: npm run format:check
       - name: Type check
         run: npx tsc --noEmit
+      - name: Test + coverage
+        run: npm run test:coverage
+      - name: Upload coverage to Codecov
+        if: matrix.node-version == 20
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Build
         run: npm run build:npm
       - name: Bundle size budget
