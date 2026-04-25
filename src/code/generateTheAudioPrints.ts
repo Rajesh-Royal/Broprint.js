@@ -1,20 +1,17 @@
 //  ref = https://github.com/rickmacgillis/audio-fingerprint/blob/master/audio-fingerprinting.js
 // @ts-nocheck
 export const generateTheAudioFingerPrint = (function () {
-
-    var context = null;
-    var currentTime = null;
-    var oscillator = null;
-    var compressor = null;
-    var fingerprint = null;
-    var callback = null
+    let context = null;
+    let currentTime = null;
+    let oscillator = null;
+    let compressor = null;
+    let fingerprint = null;
+    let callback = null;
 
     function run(cb, debug = false) {
-
         callback = cb;
 
         try {
-
             setup();
 
             oscillator.connect(compressor);
@@ -24,13 +21,10 @@ export const generateTheAudioFingerPrint = (function () {
             context.startRendering();
 
             context.oncomplete = onComplete;
-
         } catch (e) {
-
             if (debug) {
                 throw e;
             }
-
         }
     }
 
@@ -42,13 +36,13 @@ export const generateTheAudioFingerPrint = (function () {
     }
 
     function setContext() {
-        var audioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        const audioContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
         context = new audioContext(1, 44100, 44100);
     }
 
     function setOscillator() {
         oscillator = context.createOscillator();
-        oscillator.type = "triangle";
+        oscillator.type = 'triangle';
         oscillator.frequency.setValueAtTime(10000, currentTime);
     }
 
@@ -60,11 +54,14 @@ export const generateTheAudioFingerPrint = (function () {
         setCompressorValueIfDefined('ratio', 12);
         setCompressorValueIfDefined('reduction', -20);
         setCompressorValueIfDefined('attack', 0);
-        setCompressorValueIfDefined('release', .25);
+        setCompressorValueIfDefined('release', 0.25);
     }
 
     function setCompressorValueIfDefined(item, value) {
-        if (compressor[item] !== undefined && typeof compressor[item].setValueAtTime === 'function') {
+        if (
+            compressor[item] !== undefined &&
+            typeof compressor[item].setValueAtTime === 'function'
+        ) {
             compressor[item].setValueAtTime(value, context.currentTime);
         }
     }
@@ -75,12 +72,10 @@ export const generateTheAudioFingerPrint = (function () {
     }
 
     function generateFingerprints(event) {
-        var output = null;
-        for (var i = 4500; 5e3 > i; i++) {
-
-            var channelData = event.renderedBuffer.getChannelData(0)[i];
+        let output = null;
+        for (let i = 4500; 5e3 > i; i++) {
+            const channelData = event.renderedBuffer.getChannelData(0)[i];
             output += Math.abs(channelData);
-
         }
 
         fingerprint = output.toString();
@@ -93,6 +88,4 @@ export const generateTheAudioFingerPrint = (function () {
     return {
         run: run
     };
-
 })();
-

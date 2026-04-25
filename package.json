@@ -20,6 +20,10 @@
     "build:bundle": "tsup src/index.ts --format esm,cjs,iife --global-name Broprint --out-dir lib --minify --clean --silent",
     "build": "npm run build:bundle && npm run build:types",
     "build:npm": "npm run build:bundle && npm run build:types",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\"",
     "test": "echo \"Error: no test specified\" && exit 1 "
   },
   "repository": {
@@ -60,7 +64,11 @@
     "README.MD"
   ],
   "devDependencies": {
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.3",
     "tsup": "^8.5.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.59.0"
   }
 }
