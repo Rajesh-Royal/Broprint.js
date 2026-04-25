@@ -14,6 +14,10 @@
     },
     "./global": "./lib/index.global.js"
   },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "private": false,
   "scripts": {
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir lib --declarationMap false",
@@ -25,7 +29,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
     "test": "echo \"Error: no test specified\" && exit 1 ",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -44,12 +49,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
+    "browser-fingerprint",
     "browserfingerprint",
     "fingerprinting",
     "jsfingerprint",
     "uniquebrowserid",
-    "nodejs",
-    "cryptography",
+    "device-id",
+    "zero-dependency",
     "fraud-detection",
     "canvas-fingerprinting",
     "audio-fingerprinting",
