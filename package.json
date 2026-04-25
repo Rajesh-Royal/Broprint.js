@@ -28,7 +28,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json,md}\" \"*.{ts,tsx,json}\"",
-    "test": "echo \"Error: no test specified\" && exit 1 ",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "prepare": "husky",
     "prepublishOnly": "npm run build"
   },
@@ -77,6 +79,7 @@
     "README.MD"
   ],
   "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.9",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
@@ -84,6 +87,7 @@
     "prettier": "^3.8.3",
     "tsup": "^8.5.0",
     "typescript": "^5.4.0",
-    "typescript-eslint": "^8.59.0"
+    "typescript-eslint": "^8.59.0",
+    "vitest": "^2.1.9"
   }
 }
